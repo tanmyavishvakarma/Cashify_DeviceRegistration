@@ -3,6 +3,10 @@ import {BrowserRouter, Switch,Route} from 'react-router-dom'
 import Navbar from './layout/Navbar'
 import M from  'materialize-css/dist/js/materialize.min.js'
 import Dashboard from './dashboard/Dashboard';
+import ProjectNotes from'./projects/ProjectNotes'
+import Signin from './auth/Signin'
+import Signup from './auth/Signup'
+import CreateProject from './projects/CreateProject'
 class App extends Component{
   componentDidMount() {
     let sidenav = document.querySelector('#slide-out');
@@ -15,7 +19,12 @@ class App extends Component{
         <div className="App">
           <Navbar />
           <Switch>
-            <Route path="/" component={Dashboard}></Route>
+            <Route exact path="/" component={Dashboard}></Route>
+            <Route path='/projects/:id' component={ProjectNotes}></Route>
+            <Route path="/signin" component={Signin}></Route>
+            <Route path="/signup" component={Signup}></Route>
+            <Route path="/addproject" component={CreateProject}></Route>
+
           </Switch>
         </div>
       </BrowserRouter>
@@ -23,4 +32,4 @@ class App extends Component{
   }
 }
 
-export default App;
+export default App; 

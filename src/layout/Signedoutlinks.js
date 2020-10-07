@@ -6,8 +6,8 @@ const Sighnedoutlinks=()=>{
     return(    
         <ul className="right">
           
-            <li><NavLink to="/">Sigh Up</NavLink></li>
-            <li><NavLink to="/">Login</NavLink></li>
+            <li><NavLink to="/signup">Sigh Up</NavLink></li>
+            <li><NavLink to="/signin">Login</NavLink></li>
             
         </ul>
 
