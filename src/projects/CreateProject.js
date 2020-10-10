@@ -1,18 +1,29 @@
+import { database } from '../firbase/firebase';
 import React, { Component } from 'react'
 
 class CreateProject extends Component{
-    state={
-        devicecompany:'',
-        serialno:'',
+    constructor(props){
+        super(props);
+            this.state={
+                serialno:'',
+                devicecompany:''
+            };
+        this.onInputChange=this.onInputChange.bind(this);
+        this.handleSubmit=this.handleSubmit.bind(this);
     }
-    handleChange=(e)=>{
+    
+    onInputChange=(e)=>{
         this.setState({
-            [e.target   .id]:e.target.value
+            [e.target.name]:e.target.value
         })
     }
     handleSubmit=(e)=>{
         e.preventDefault();
-        console.log(this.state);
+        const post={
+            serialno:this.state.serialno,
+            devicecompany:this.state.devicecompany
+        };
+        database.push(post)
     }
 
 
@@ -26,11 +37,11 @@ class CreateProject extends Component{
                            
                             <div className="input-field">
                                 <label htmlFor="serialno">Serial Number</label>
-                                <input type ="text" id="serialno" onChange={this.handleChange}></input>
+                                <input type ="text" name="serialno" onChange={this.onInputChange}></input>
                             </div>
                             <div className="input-field">
                                 <label htmlFor="devicecompany">Device Company</label>
-                                <input type ="text" id="devicecompany" onChange={this.handleChange}></input>
+                                <input type ="text" name="devicecompany" onChange={this.onInputChange}></input>
                             </div>
                             <div className="input-field">
                                 <button className="btn blue lighten-1 z-depth-0">Add Project</button>
