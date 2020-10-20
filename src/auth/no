@@ -1,0 +1,95 @@
+
+import React, { Component } from 'react'
+import devicedataservice from "../services/services"
+
+class CreateProject extends Component{
+    constructor(props){
+        super(props);
+            this.state={
+                device
+                serialno:'',
+                brand:'',
+                modelname:'',
+                submitted:false
+            };
+        this.onChangeSerialno=this.onChangeSerialno.bind(this);
+        this.onChangeBrand=this.onChangeBrand.bind(this);
+        this.onChangeModelName=this.onChangeModelName.bind(this);
+        this.handleSubmit=this.handleSubmit.bind(this);
+    }
+    componentDidMount(){
+
+    }
+    
+   onChangeSerialno(e){
+       this.setState({
+           serialno:e.target.value
+       });
+   }
+   onChangeBrand(e){
+       this.setState({
+           brand:e.target.value
+       });
+   }
+   onChangeModelName(e){
+       this.setState({
+           modelname:e.target.value
+       });
+   }
+   handleSubmit(e){
+      
+       var data={
+           serialno:this.state.serialno,
+           brand:this.state.brand,
+           modelname:this.state.modelname
+       };
+      
+  
+      devicedataservice.create(data)
+        .then(response => {
+          this.setState({
+            
+            serialno:response.data.serialno,
+            brand:response.data.brand,
+            modelname:response.data.modelname,
+  
+            submitted: true
+          });
+        
+        })
+        .catch(e => {
+         
+        });
+    }
+  
+    render(){
+        return(
+            <div>
+                <div className="container ">
+                    <form className="white">
+                        
+                            <h5 className="grey-text text-darken-3">Create Project</h5>
+                           
+                            <div className="input-field">
+                                <label htmlFor="serialno">Serial Number</label>
+                                <input  id="serialno" value={this.state.serialno} type ="text" name="serialno" onChange={this.onChangeSerialno}></input>
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="brand">Brand</label>
+                                <input  id="brand" value={this.state.brand} type ="text" name="brand" onChange={this.onChangeBrand}></input>
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="modelname">Model Name</label>
+                                <input  id="modelname" value={this.state.modelname} type ="text" name="modelname" onChange={this.onChangeModelName}></input>
+                            </div>
+                            <div className="input-field">
+                                <button onSubmit={this.handleSubmit} className="btn blue lighten-1 z-depth-0">Add Project</button>
+                            </div>  
+                        
+                    </form>
+                </div>
+            </div>
+        )
+    }
+}
+export default CreateProject
