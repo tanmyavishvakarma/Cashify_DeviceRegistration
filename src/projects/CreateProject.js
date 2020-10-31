@@ -8,47 +8,40 @@ class CreateProject extends Component{
         this.state={
             serialno:'',
             modelname:'',
-            brand:''
-           
+            brand:''     
         }
-      
     }
     handleSerialnoChange = (e) => {
         this.setState({
           serialno: e.target.value,
-      
         })
-      
-      }
-      handleBrandChange = (e) => {
+    }
+    handleBrandChange = (e) => {
         this.setState({
-          brand: e.target.value,
-      
+          brand: e.target.value,  
         })
-      
-      }
-      handleModelChange = (e) => {
+    }
+    handleModelChange = (e) => {
         this.setState({
           modelname: e.target.value,
-      
         })
-      
-      }
-
-
+    }
     handlesubmit=(e)=>{  
-        
-
-        e.preventDefault();
-   
          axios.post('http://localhost:3000/addproject',{
            serialno:this.state.serialno,
            brand:this.state.brand,
            modelname:this.state.modelname,
          }).then(()=>{ 
-           alert("suc")
-         //  console.log(this.name);
+          
+    
+        
          });
+         e.preventDefault();
+         this.setState({
+            serialno:"",
+            brand:"",
+            modelname:""
+        });
        
         }
        
@@ -66,15 +59,15 @@ render(){
                        
                         <div className="input-field">
                             <label htmlFor="serialno">Serial Number</label>
-                            <input  id="serialno"  type ="text" name="serialno"  onChange={this.handleSerialnoChange}></input>
+                            <input  id="serialno"  type ="text" name="serialno"  value={this.state.serialno} onChange={this.handleSerialnoChange}></input>
                         </div>
                         <div className="input-field">
                             <label htmlFor="brand">Brand</label>
-                            <input  id="brand"type ="text" name="brand"  onChange={this.handleBrandChange}></input>
+                            <input  id="brand"type ="text" name="brand"   value={this.state.brand} onChange={this.handleBrandChange}></input>
                         </div>
                         <div className="input-field">
                             <label htmlFor="modelname">Model Name</label>
-                            <input  id="modelname" type ="text" name="modelname"  onChange={this.handleModelChange}></input>
+                            <input  id="modelname" type ="text" name="modelname"  value={this.state.modelname} onChange={this.handleModelChange}></input>
                         </div>
                         <div className="input-field">
                             <button  onClick={this.handlesubmit} className="btn blue lighten-1 z-depth-0">Add Project</button>
